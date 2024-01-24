@@ -3,18 +3,36 @@
         <table class="table table-striped table-hover table-bordered">
             <thead>
                 <tr>
-                    <th>No</th>
-                    <th>Categories</th>
-                    <th>Description</th>
+                    <th>Category</th>
+                    <th>Created At</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <th>1</th>
-                    <th>Test1</th>
-                    <th>Desc1</th>
-                </tr>
+                <tr v-for="category in categories.data" :key="category.id">
+                    <td>{{ category.name }}</td>
+                    <td>{{category.created_at}}</td>
+                    </tr>
             </tbody>
         </table>
     </div>
 </template>
+
+<script>
+export default {
+    data() {
+        return {
+            categories: []
+        }
+    },
+    mounted() {
+        this.fetchCategories()
+    },
+    methods: {
+        fetchCategories() {
+            axios.get('/api/categories')
+                .then(response => this.categories = response.data)
+                .catch(error => console.log(error))
+        }
+    }
+}
+</script>
