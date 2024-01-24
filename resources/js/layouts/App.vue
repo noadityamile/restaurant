@@ -15,6 +15,9 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item">
+                            <router-link active-class="text-red" class="nav-link" to="/menu">Menu</router-link>
+                        </li>
+                        <li class="nav-item">
                             <router-link active-class="text-red" class="nav-link" to="/items">Items</router-link>
                         </li>
                         <li class="nav-item">
@@ -64,7 +67,6 @@
 
         <!-- Page Content -->
         <main>
-
             <div class="container">
                 <router-view></router-view>
             </div>
