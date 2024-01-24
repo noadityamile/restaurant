@@ -55,6 +55,13 @@
             </div>
         </nav>
 
+        <header class="container my-4">
+            <div class="card">
+                <h2 class="card-header">{{ currentPageTitle }}</h2>
+            </div>
+
+        </header>
+
         <!-- Page Content -->
         <main>
 
@@ -63,4 +70,14 @@
             </div>
 
         </main>
-    </div></template>
+    </div>
+</template>
+
+<script setup>
+import { computed } from 'vue';
+import { useRoute } from 'vue-router'
+
+const route = useRoute()
+
+const currentPageTitle = computed(() => route.meta.title)
+</script>
