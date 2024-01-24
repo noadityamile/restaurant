@@ -4,6 +4,7 @@ import { useRouter } from 'vue-router'
 export default function useItems() {
     const items = ref({})
     const router = useRouter()
+    const validationErrors = ref({})
 
     const getItems = async (
         page = 1,
@@ -24,7 +25,12 @@ export default function useItems() {
             .then(response => {
                 router.push({ name: 'items.index' })
             })
+            .catch(error => {
+                if (error.response?.data) {
+                    validationErrors.value = error.response.data.errors
+                }
+            })
     }
 
-    return { items, getItems, storeItem }
+    return { items, getItems, storeItem, validationErrors }
 }

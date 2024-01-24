@@ -17,7 +17,12 @@ class StoreItemRequest extends FormRequest
             'name' => ['required'],
             'description' => ['required'],
             'category_id' => ['required',  'exists:categories,id'],
-            'price' => ['required',  'numeric']
+            'price' => ['required',  'numeric', 'not_in:0']
         ];
+    }
+
+    public function attributes(): array
+    {
+        return ['category_id' => 'category'];
     }
 }

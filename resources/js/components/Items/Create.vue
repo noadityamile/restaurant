@@ -4,8 +4,11 @@
         <hr>
         <form class="form mb-4" @submit.prevent="storeItem(item)">
             <div class="row my-2">
-                <div class="col-5">
-                    <input type="text" v-model="item.name" class="form-control mx-2" placeholder="Item name...">
+                <div class="col-5 mx-2">
+                    <input type="text" v-model="item.name" class="form-control" placeholder="Item name...">
+                    <div v-for="message in validationErrors?.name" class="text-danger">
+                        {{ message }}
+                    </div>
                 </div>
                 <div class="col-3">
                     <select id="item-category" v-model="item.category_id" class="form-control mx-2">
@@ -14,15 +17,24 @@
                             {{ category.name }}
                         </option>
                     </select>
+                    <div v-for="message in validationErrors?.category_id" class="text-danger">
+                        {{ message }}
+                    </div>
                 </div>
                 <div class="col-3">
                     <input type="number" v-model="item.price" class="form-control mx-2" placeholder="Price... ($)">
+                    <div v-for="message in validationErrors?.price" class="text-danger">
+                        {{ message }}
+                    </div>
                 </div>
 
             </div>
             <div class="row">
                 <div class="col-11">
                     <input type="text" v-model="item.description" class="form-control mx-2" placeholder="Description...">
+                    <div v-for="message in validationErrors?.description" class="text-danger">
+                        {{ message }}
+                    </div>
                 </div>
             </div>
             <div class="row justify-content-end mt-2">
@@ -48,8 +60,9 @@ const item = reactive({
 
 
 const { categories, getCategories } = useCategories()
-const { storeItem } = useItems()
+const { storeItem, validationErrors } = useItems()
 
+console.log(validationErrors)
 onMounted(() => {
     getCategories()
 })
