@@ -17,9 +17,8 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-});
+Route::view('/{any?}', 'dashboard')
+    ->where('any', '.*');
 
 Auth::routes();
 
