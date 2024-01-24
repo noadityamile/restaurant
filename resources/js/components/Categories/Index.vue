@@ -17,22 +17,12 @@
     </div>
 </template>
 
-<script>
-export default {
-    data() {
-        return {
-            categories: []
-        }
-    },
-    mounted() {
-        this.fetchCategories()
-    },
-    methods: {
-        fetchCategories() {
-            axios.get('/api/categories')
-                .then(response => this.categories = response.data)
-                .catch(error => console.log(error))
-        }
-    }
-}
+<script setup>
+import { onMounted } from "vue";
+import useCategories from "../../composables/categories";
+
+const { categories, getCategories } = useCategories()
+onMounted(() => {
+    getCategories()
+})
 </script>
