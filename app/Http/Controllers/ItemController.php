@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\CategoryResource;
-use App\Models\Category;
+use App\Http\Requests\StoreItemRequest;
+use App\Http\Resources\ItemResource;
+use App\Models\Item;
 use Illuminate\Http\Request;
 
 class ItemController extends Controller
@@ -15,10 +16,10 @@ class ItemController extends Controller
      */
     public function index()
     {
-        $items = Category::with('children', 'discounts', 'item')
+        $items = Item::with('category', 'discounts')
         ->paginate(10);
 
-    return CategoryResource::collection($items);
+    return ItemResource::collection($items);
     }
 
     /**
@@ -37,9 +38,11 @@ class ItemController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreItemRequest $request)
     {
-        //
+        $post = Item::create($request->validated());
+
+        return new ItemResource($post);
     }
 
     /**

@@ -8,16 +8,19 @@ import MenusIndex from '../components/Menus/MenuIndex.vue'
 const routes = [
     {
         path: '/items',
+        name: 'items.index',
         component: ItemsIndex,
         meta: { title: 'Build Your Own Menu' }
     },
     {
         path: '/categories',
+        name: 'categories.index',
         component: CategoriesIndex,
         meta: { title: 'Categories Menu' }
     },
     {
         path: '/menu',
+        name: 'menu.index',
         component: MenusIndex,
         meta: { title: 'Main Menu' }
     },

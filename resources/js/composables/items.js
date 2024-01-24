@@ -1,7 +1,9 @@
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 
 export default function useItems() {
     const items = ref({})
+    const router = useRouter()
 
     const getItems = async (
         page = 1,
@@ -17,5 +19,12 @@ export default function useItems() {
             })
     }
 
-    return { items, getItems }
+    const storeItem = async (item) => {
+        axios.post('/api/items', item)
+            .then(response => {
+                router.push({ name: 'items.index' })
+            })
+    }
+
+    return { items, getItems, storeItem }
 }
