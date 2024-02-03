@@ -4,7 +4,9 @@ import ItemsIndex from '../components/Items/Index.vue'
 import CategoriesIndex from '../components/Categories/Index.vue'
 import MenusIndex from '../components/Menus/MenuIndex.vue'
 
+import DiscountsIndex from '../components/Discounts/Index.vue'
 import DiscountsCreate from '../components/Discounts/Create.vue'
+
 // import ItemsCreate from './components/Items/Create.vue'
 
 const routes = [
@@ -27,6 +29,12 @@ const routes = [
         meta: { title: 'Main Menu' }
     },
     //discounts
+    {
+        path: '/discounts',
+        component: DiscountsIndex,
+        name: 'discounts.index',
+        meta: { title: 'Discount List' }
+    },
     {
         path: '/discounts/create',
         component: DiscountsCreate,
