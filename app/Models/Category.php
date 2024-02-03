@@ -9,14 +9,14 @@ class Category extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'parent_id'];
+    protected $fillable = ['category_name', 'parent_id'];
 
     public function scopeRoot($query){
-        $query->where('parent_id', 0);
+        $query->where('parent_id', 0)->orWhere('parent_id', null);
     }
 
     public function children(){
-        return $this->hasMany(Category::class, 'parent_id')->with(['children', 'item']);
+        return $this->hasMany(Category::class, 'parent_id')->with(['children', 'item', 'discounts']);
     }
 
     public function parent(){
@@ -31,11 +31,9 @@ class Category extends Model
     //     return $this->children()->with(['childrenRecursive', 'item', 'discount', 'inherit_discount']);
     // }
 
-
-    //jangan diubah
     public function discounts()
     {
-        return $this->morphToMany(Discount::class, 'discountable');
+        return $this->morphOne(Discount::class, 'discountable');
     }
 
     public function inheritDiscount()

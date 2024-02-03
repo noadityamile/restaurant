@@ -10,7 +10,7 @@ class Item extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name',
+        'item_name',
         'category_id',
         'price',
         'description'
@@ -23,7 +23,7 @@ class Item extends Model
 
     public function discounts()
     {
-        return $this->morphToMany(Discount::class, 'discountable');
+        return $this->morphOne(Discount::class, 'discountable');
     }
 
     public function getEffectivePriceAttribute()

@@ -9,13 +9,10 @@ class Discount extends Model
 {
     use HasFactory;
 
-    public function categories()
-    {
-        return $this->morphedByMany(Category::class, 'discountable');
-    }
+    protected $fillable = ['discountable_type','discountable_id', 'percentage', 'discount_name'];
 
-    public function items()
+    public function discountable()
     {
-        return $this->morphedByMany(Item::class, 'discountable');
+        return $this->morphTo();
     }
 }
