@@ -1,15 +1,30 @@
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 
 export default function useDiscounts() {
     const discounts = ref({})
+    const router = useRouter()
 
     const getDiscounts = async (page = 1) => {
-        axios.get('/api/discounts?page=' + page)
-            .then(response => {
-                discounts.value = response.data;
-            })
-    }
+        try {
+            const response = await axios.get('/api/discounts?page=' + page);
+            discounts.value = response.data;
+        } catch (error) {
+            console.error('Error fetching discounts:', error);
+            throw error;
+        }
+    };
+
+    const storeDiscount = async (discount) => {
+        try {
+            const response = await axios.post('/api/discounts', discount);
+            router.push({ name: 'discounts.index' });
+        } catch (error) {
+            console.error('Error storing discount:', error);
+            throw error;
+        }
+    };
 
 
-    return { discounts, getDiscounts }
+    return { discounts, getDiscounts, storeDiscount }
 }
