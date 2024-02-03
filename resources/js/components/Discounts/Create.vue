@@ -5,6 +5,9 @@
                 Discount Name
             </label>
             <input id="discount-name" type="text" class="form-control" name="name" v-model="discount.name">
+            <div class="text-danger" v-for="message in validationErrors?.name">
+                {{ message }}
+            </div>
         </div>
 
         <div class="mt-4">
@@ -17,6 +20,10 @@
                 <option value="per-category">Per Category</option>
                 <option value="per-item">Per Item</option>
             </select>
+
+            <div class="text-danger" v-for="message in validationErrors?.scheme">
+                {{ message }}
+            </div>
         </div>
 
         <div class="mt-4" v-show="showTarget">
@@ -26,13 +33,22 @@
                     {{ target.name }}
                 </option>
             </select>
+
+            <div class="text-danger" v-for="message in validationErrors?.targets">
+                {{ message }}
+            </div>
         </div>
 
         <div class="mt-4">
             <label for="discount-percentage">
                 Percentage
             </label>
-            <input name="percentage" v-model="discount.percentage" id="discount-percentage" type="number" class="form-control" max="100">
+            <input name="percentage" v-model="discount.percentage" id="discount-percentage" type="number"
+                class="form-control" max="100">
+
+            <div class="text-danger" v-for="message in validationErrors?.percentage">
+                {{ message }}
+            </div>
         </div>
 
         <input type="submit" class="mt-2 btn btn-primary">
@@ -48,7 +64,7 @@ import useItems from '../../composables/items';
 const showTarget = ref(false);
 const labelTarget = ref(null);
 
-const { storeDiscount } = useDiscounts()
+const { storeDiscount, validationErrors } = useDiscounts()
 const { categories, getCategories } = useCategories()
 const { items, getItems } = useItems()
 

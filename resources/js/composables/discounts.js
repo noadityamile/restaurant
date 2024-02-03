@@ -4,6 +4,7 @@ import { useRouter } from 'vue-router'
 export default function useDiscounts() {
     const discounts = ref({})
     const router = useRouter()
+    const validationErrors = ref({})
 
     const getDiscounts = async (page = 1) => {
         try {
@@ -20,11 +21,11 @@ export default function useDiscounts() {
             const response = await axios.post('/api/discounts', discount);
             router.push({ name: 'discounts.index' });
         } catch (error) {
-            console.error('Error storing discount:', error);
-            throw error;
+            if (error.response?.data) {
+                validationErrors.value = error.response.data.errors
+            }
         }
     };
 
-
-    return { discounts, getDiscounts, storeDiscount }
+    return { discounts, getDiscounts, storeDiscount, validationErrors }
 }
