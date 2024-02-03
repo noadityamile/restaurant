@@ -7,7 +7,7 @@
 
             <base-input v-model="item.price" label="Price" type="number" :errors="validationErrors?.price" />
 
-        <select-option v-model="item.category" label="Under Category" :errors="validationErrors?.scheme"
+        <select-option v-model="item.category_id" label="Under Category" :errors="validationErrors?.scheme"
             :options="categoryOption" :initial="'--Choose Category--'" />
 
         <input type="submit" class="mt-2 btn btn-primary">

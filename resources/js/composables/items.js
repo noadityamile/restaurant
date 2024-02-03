@@ -26,20 +26,15 @@ export default function useItems() {
     };
 
     const storeItem = async (item) => {
-        axios.post('/api/items', item)
-            .then(response => {
-                router.push({ name: 'items.index' })
-                swal({
-                    icon: 'success',
-                    title: 'Post saved successfully'
-                })
-            })
-            .catch(error => {
-                if (error.response?.data) {
-                    validationErrors.value = error.response.data.errors
-                }
-            })
-    }
+        try {
+            const response = await axios.post('/api/items', item);
+            router.push({ name: 'items.index' });
+        } catch (error) {
+            if (error.response?.data) {
+                validationErrors.value = error.response.data.errors
+            }
+        }
+    };
 
     return { items, getItems, storeItem, validationErrors }
 }
