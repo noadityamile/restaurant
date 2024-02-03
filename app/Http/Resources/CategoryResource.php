@@ -16,11 +16,11 @@ class CategoryResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'name' => $this->name,
+            'category_name' => $this->category_name,
             'parent_id' => $this->parent_id,
             'created_at' => $this->created_at->toDateString(),
             'children' => $this->children,
-            'discount' => $this->discount,
+            'discounts' => $this->discounts,
             'item' => $this->item
         ];
     }

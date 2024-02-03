@@ -1,10 +1,10 @@
 <template>
     <ul>
         <li v-for="subcategory in children" :key="subcategory.id">
-            {{ subcategory.name }}
+            {{ subcategory.category_name }}
             <span v-if="subcategory.item != null" class="bg-success">
                 <ul>
-                    <li><h4>{{subcategory.item.name }} <span class="px-4">${{ subcategory.item.price }}</span></h4></li>
+                    <li><h4>{{subcategory.item.item_name }} <span class="px-4">${{ subcategory.item.price }}</span></h4></li>
                 </ul>
             </span>
             <Tree :children="subcategory.children" :indent="newIndent" :item="subcategory.item"></Tree>

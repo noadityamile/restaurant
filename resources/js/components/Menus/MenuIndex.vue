@@ -2,11 +2,11 @@
     <div>
         <ul>
             <li v-for="category in categories.data" :key="category.id">
-                {{ category.name }}
+                {{ category.category_name }}
                 <span v-if="category.item != null" class="bg-success">
                     <ul>
                         <li>
-                            <h4>{{ category.item.name }} <span class="px-4">${{ category.item.price }}</span></h4>
+                            <h4>{{ category.item.item_name }} <span class="px-4">${{ category.item.price }}</span></h4>
                         </li>
                     </ul>
                 </span>

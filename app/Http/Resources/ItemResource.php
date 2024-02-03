@@ -21,6 +21,7 @@ class ItemResource extends JsonResource
             'category' => $this->category->name,
             'category_id' => $this->category_id,
             'price' => $this->price,
+            'discounts' => $this->discounts,
             'created_at' => $this->created_at->toDateString()
         ];
     }

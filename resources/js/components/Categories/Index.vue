@@ -9,7 +9,7 @@
             </thead>
             <tbody>
                 <tr v-for="category in categories.data" :key="category.id">
-                    <td>{{ category.name }}</td>
+                    <td>{{ category.category_name }}</td>
                     <td>{{ category.created_at }}</td>
                 </tr>
             </tbody>
