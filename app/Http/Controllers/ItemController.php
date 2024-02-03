@@ -16,8 +16,7 @@ class ItemController extends Controller
      */
     public function index()
     {
-        $items = Item::with('category', 'discounts')
-        ->paginate(10);
+        $items = Item::with('category', 'discounts')->get();
 
     return ItemResource::collection($items);
     }

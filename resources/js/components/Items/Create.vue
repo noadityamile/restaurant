@@ -1,70 +1,41 @@
 <template>
-    <div class="container card mb-4">
-        <h5 class="text mt-3">Add New Item</h5>
-        <hr>
-        <form class="form mb-4" @submit.prevent="storeItem(item)">
-            <div class="row my-2">
-                <div class="col-5 mx-2">
-                    <input type="text" v-model="item.name" class="form-control" placeholder="Item name...">
-                    <div v-for="message in validationErrors?.name" class="text-danger">
-                        {{ message }}
-                    </div>
-                </div>
-                <div class="col-3">
-                    <select id="item-category" v-model="item.category_id" class="form-control mx-2">
-                        <option value="" selected disabled>-- Choose category --</option>
-                        <option v-for="category in categories.data" :value="category.id">
-                            {{ category.name }}
-                        </option>
-                    </select>
-                    <div v-for="message in validationErrors?.category_id" class="text-danger">
-                        {{ message }}
-                    </div>
-                </div>
-                <div class="col-3">
-                    <input type="number" v-model="item.price" class="form-control mx-2" placeholder="Price... ($)">
-                    <div v-for="message in validationErrors?.price" class="text-danger">
-                        {{ message }}
-                    </div>
-                </div>
+    <form @submit.prevent="storeItem(item)">
+        <base-input v-model="item.name" label="Item Name" type="text" :errors="validationErrors?.name" />
 
-            </div>
-            <div class="row">
-                <div class="col-11">
-                    <input type="text" v-model="item.description" class="form-control mx-2" placeholder="Description...">
-                    <div v-for="message in validationErrors?.description" class="text-danger">
-                        {{ message }}
-                    </div>
-                </div>
-            </div>
-            <div class="row justify-content-end mt-2">
-                <div class="col-2">
-                    <input type="submit" class="btn btn-primary">
-                </div>
-            </div>
-        </form>
-    </div>
+        <base-input v-model="item.description" label="Food Description" type="text"
+            :errors="validationErrors?.description" />
+
+            <base-input v-model="item.price" label="Price" type="number" :errors="validationErrors?.price" />
+
+        <select-option v-model="item.category" label="Under Category" :errors="validationErrors?.scheme"
+            :options="categoryOption" :initial="'--Choose Category--'" />
+
+        <input type="submit" class="mt-2 btn btn-primary">
+    </form>
 </template>
 
 <script setup>
-import { onMounted, reactive } from 'vue';
-import useCategories from '../../composables/categories';
+import { ref, reactive, onMounted } from 'vue';
 import useItems from '../../composables/items';
+import useCategories from '../../composables/categories';
+import BaseInput from '../templates/BaseInput.vue';
+import SelectOption from '../templates/SelectOption.vue';
+
+const { storeItem, validationErrors } = useItems()
+const { categories, getCategories } = useCategories()
 
 const item = reactive({
     name: '',
     description: '',
-    category_id: '',
-    price: 0
+    category: '',
+    price:0
 })
 
+const categoryOption = ref([]);
 
-const { categories, getCategories } = useCategories()
-const { storeItem, validationErrors } = useItems()
-
-console.log(validationErrors)
-onMounted(() => {
-    getCategories()
+onMounted(async () => {
+    await getCategories()
+    categoryOption.value = categories.value.data
 })
 
 </script>

@@ -7,7 +7,7 @@
     </div>
     <div id="listItem">
         <div class="container">
-            <button class="btn btn-primary m-2" @click="setCreateForm()">Add new Item</button>
+            <router-link to="/items/create" class="mb-2 btn btn-primary">+ Add Item</router-link>
             <table class="table table-striped table-hover table-bordered">
                 <thead>
                     <tr>

@@ -7,7 +7,7 @@ import MenusIndex from '../components/Menus/MenuIndex.vue'
 import DiscountsIndex from '../components/Discounts/Index.vue'
 import DiscountsCreate from '../components/Discounts/Create.vue'
 
-// import ItemsCreate from './components/Items/Create.vue'
+import ItemsCreate from '../components/Items/Create.vue'
 
 const routes = [
     {
@@ -15,6 +15,12 @@ const routes = [
         name: 'items.index',
         component: ItemsIndex,
         meta: { title: 'Build Your Own Menu' }
+    },
+    {
+        path: '/items/create',
+        name: 'items.create',
+        component: ItemsCreate,
+        meta: { title: 'Add Item' }
     },
     {
         path: '/categories',
