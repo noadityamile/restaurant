@@ -1,5 +1,6 @@
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
+import Swal from 'sweetalert2';
 
 export default function useDiscounts() {
     const discounts = ref({})
@@ -27,5 +28,23 @@ export default function useDiscounts() {
         }
     };
 
-    return { discounts, getDiscounts, storeDiscount, validationErrors }
+    const deleteDiscount = async (id) => {
+        try {
+            await axios.delete(`/api/discounts/${id}`);
+            await getDiscounts();
+            router.push({ name: 'discounts.index' });
+            Swal.fire({
+                icon: 'success',
+                title: 'Discount deleted successfully'
+            });
+        } catch (error) {
+            console.error('Error deleting discount:', error);
+            Swal.fire({
+                icon: 'error',
+                title: 'Something went wrong'
+            });
+        }
+    };
+
+    return { discounts, getDiscounts, storeDiscount, deleteDiscount, validationErrors }
 }

@@ -20,6 +20,9 @@
                     <th>
                         Percentage
                     </th>
+                    <th>
+                        Action
+                    </th>
                 </tr>
             </thead>
             <tbody>
@@ -39,6 +42,9 @@
                     <td>
                         {{ discount.percentage }}
                     </td>
+                    <td>
+                        <a href="#" @click.prevent="deleteDiscount(discount.id)" class="ml-2">Delete</a>
+                    </td>
                 </tr>
             </tbody>
         </table>
@@ -49,7 +55,7 @@
 import { onMounted } from "vue";
 import useDiscounts from "../../composables/discounts";
 
-const { discounts, getDiscounts } = useDiscounts()
+const { discounts, getDiscounts, deleteDiscount } = useDiscounts()
 onMounted(() => {
     getDiscounts()
 })

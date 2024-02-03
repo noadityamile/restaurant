@@ -70,4 +70,8 @@ class DiscountRepository
             );
         }
     }
+
+    public function delete($discount){
+        return $discount->delete();
+     }
 }
