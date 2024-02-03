@@ -3,6 +3,8 @@ import { createRouter, createWebHistory } from 'vue-router';
 import ItemsIndex from '../components/Items/Index.vue'
 import CategoriesIndex from '../components/Categories/Index.vue'
 import MenusIndex from '../components/Menus/MenuIndex.vue'
+
+import DiscountsCreate from '../components/Discounts/Create.vue'
 // import ItemsCreate from './components/Items/Create.vue'
 
 const routes = [
@@ -23,6 +25,13 @@ const routes = [
         name: 'menu.index',
         component: MenusIndex,
         meta: { title: 'Main Menu' }
+    },
+    //discounts
+    {
+        path: '/discounts/create',
+        component: DiscountsCreate,
+        name: 'discounts.create',
+        meta: { title: 'Create Discount' }
     },
 
 ]
