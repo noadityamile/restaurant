@@ -1,17 +1,17 @@
 <template>
-    <form @submit.prevent="submit">
+    <form @submit.prevent="storeDiscount(discount)">
         <div>
             <label for="discount-name">
                 Discount Name
             </label>
-            <input id="discount-name" type="text" class="form-control">
+            <input id="discount-name" type="text" class="form-control" name="name" v-model="discount.name">
         </div>
 
         <div class="mt-4">
             <label>
                 Discount Scheme
             </label>
-            <select class="form-select" v-model="selectedScheme" @change="updateTarget">
+            <select class="form-select" name="scheme" v-model="discount.scheme" @change="updateTarget">
                 <option value="" selected disabled>-- Choose Scheme --</option>
                 <option value="all-menu">All Menu</option>
                 <option value="per-category">Per Category</option>
@@ -21,8 +21,8 @@
 
         <div class="mt-4" v-show="showTarget">
             <label id="label-target">{{ labelTarget }}</label>
-            <select multiple class="form-select form-select-lg" v-model="discountTarget">
-                <option v-for="target in discountTargets">
+            <select name="targets" multiple class="form-select form-select-lg" v-model="discount.targets">
+                <option v-for="target in discountTargets" :value="target.id">
                     {{ target.name }}
                 </option>
             </select>
@@ -32,7 +32,7 @@
             <label for="discount-percentage">
                 Percentage
             </label>
-            <input id="discount-percentage" type="number" class="form-control" max="100">
+            <input name="percentage" v-model="discount.percentage" id="discount-percentage" type="number" class="form-control" max="100">
         </div>
 
         <input type="submit" class="mt-2 btn btn-primary">
@@ -40,32 +40,33 @@
 </template>
 
 <script setup>
-import { ref, onMounted, watch } from 'vue';
+import { ref, reactive } from 'vue';
 import useDiscounts from '../../composables/discounts';
 import useCategories from '../../composables/categories';
 import useItems from '../../composables/items';
 
-
-const selectedScheme = ref("");
-const discountTarget = ref([]);
 const showTarget = ref(false);
 const labelTarget = ref(null);
 
-const { discounts, getDiscounts } = useDiscounts()
+const { storeDiscount } = useDiscounts()
 const { categories, getCategories } = useCategories()
 const { items, getItems } = useItems()
 
-
 const discountTargets = ref([]);
-
+const discount = reactive({
+    name: '',
+    scheme: '',
+    percentage: 0,
+    targets: []
+})
 
 const updateTarget = async () => {
     showTarget.value = true
-    if (selectedScheme.value === 'per-category') {
+    if (discount.scheme === 'per-category') {
         await getCategories()
         labelTarget.value = "Category"
         discountTargets.value = categories.value.data
-    } else if (selectedScheme.value === 'per-item') {
+    } else if (discount.scheme === 'per-item') {
         await getItems()
         labelTarget.value = "Item"
         discountTargets.value = items.value.data

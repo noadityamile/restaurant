@@ -2,12 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreDiscountRequest;
 use App\Http\Resources\DiscountResource;
 use App\Models\Discount;
+use App\Repositories\DiscountRepository;
 use Illuminate\Http\Request;
 
 class DiscountController extends Controller
 {
+    private $discountRepo;
+
+    public function __construct()
+    {
+        $this->discountRepo = new DiscountRepository();
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -15,9 +24,7 @@ class DiscountController extends Controller
      */
     public function index()
     {
-        $discounts = Discount::get();
-
-        return DiscountResource::collection($discounts);
+        return DiscountResource::collection($this->discountRepo->getAll());
     }
 
     /**
@@ -36,9 +43,9 @@ class DiscountController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreDiscountRequest $request)
     {
-        //
+        $store = $this->discountRepo->insert($request);
     }
 
     /**
