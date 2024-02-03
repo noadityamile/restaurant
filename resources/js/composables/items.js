@@ -7,19 +7,23 @@ export default function useItems() {
     const validationErrors = ref({})
     const swal = inject('$swal')
 
-    const getItems = async (
+    const getItems = (
         page = 1,
         order_column = 'created_at',
         order_direction = 'desc'
-        ) => {
-        axios.get('/api/items?page=' + page +
-            '&order_column=' + order_column +
-            '&order_direction=' + order_direction
-        )
+    ) => {
+        return axios.get('/api/items?page=' + page +
+        '&order_column=' + order_column +
+        '&order_direction=' + order_direction
+    )
             .then(response => {
                 items.value = response.data;
             })
-    }
+            .catch(error => {
+                console.error('Error fetching items:', error);
+                throw error;
+            });
+    };
 
     const storeItem = async (item) => {
         axios.post('/api/items', item)
