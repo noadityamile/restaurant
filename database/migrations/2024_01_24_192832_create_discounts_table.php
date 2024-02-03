@@ -15,6 +15,9 @@ class CreateDiscountsTable extends Migration
     {
         Schema::create('discounts', function (Blueprint $table) {
             $table->id();
+            $table->morphs('discountable');
+            $table->string('discount_name');
+            $table->string('percentage');
             $table->timestamps();
         });
     }
