@@ -1,55 +1,16 @@
 <template>
     <form @submit.prevent="storeDiscount(discount)">
-        <div>
-            <label for="discount-name">
-                Discount Name
-            </label>
-            <input id="discount-name" type="text" class="form-control" name="name" v-model="discount.name">
-            <div class="text-danger" v-for="message in validationErrors?.name">
-                {{ message }}
-            </div>
-        </div>
-
-        <div class="mt-4">
-            <label>
-                Discount Scheme
-            </label>
-            <select class="form-select" name="scheme" v-model="discount.scheme" @change="updateTarget">
-                <option value="" selected disabled>-- Choose Scheme --</option>
-                <option value="all-menu">All Menu</option>
-                <option value="per-category">Per Category</option>
-                <option value="per-item">Per Item</option>
-            </select>
-
-            <div class="text-danger" v-for="message in validationErrors?.scheme">
-                {{ message }}
-            </div>
-        </div>
+        <base-input v-model="discount.name" label="Discount Name" type="text" :errors="validationErrors?.name" />
+        <select-option v-model="discount.scheme" label="Discount Scheme" :errors="validationErrors?.scheme"
+            :options="discountSchemeOption" :initial="'--Choose Scheme--'" @change="updateTarget" />
 
         <div class="mt-4" v-show="showTarget">
-            <label id="label-target">{{ labelTarget }}</label>
-            <select name="targets" multiple class="form-select form-select-lg" v-model="discount.targets">
-                <option v-for="target in discountTargets" :value="target.id">
-                    {{ target.name }}
-                </option>
-            </select>
-
-            <div class="text-danger" v-for="message in validationErrors?.targets">
-                {{ message }}
-            </div>
+            <select-option multiple v-model="discount.targets" :label="labelTarget" :errors="validationErrors?.targets"
+                :options="discountTargets" :initial="'Select discount targets'" />
         </div>
 
-        <div class="mt-4">
-            <label for="discount-percentage">
-                Percentage
-            </label>
-            <input name="percentage" v-model="discount.percentage" id="discount-percentage" type="number"
-                class="form-control" max="100">
-
-            <div class="text-danger" v-for="message in validationErrors?.percentage">
-                {{ message }}
-            </div>
-        </div>
+        <base-input v-model="discount.percentage" label="Percentage" type="number" :errors="validationErrors?.percentage"
+            max="100" />
 
         <input type="submit" class="mt-2 btn btn-primary">
     </form>
@@ -60,6 +21,8 @@ import { ref, reactive } from 'vue';
 import useDiscounts from '../../composables/discounts';
 import useCategories from '../../composables/categories';
 import useItems from '../../composables/items';
+import BaseInput from '../templates/BaseInput.vue';
+import SelectOption from '../templates/SelectOption.vue';
 
 const showTarget = ref(false);
 const labelTarget = ref(null);
@@ -69,6 +32,22 @@ const { categories, getCategories } = useCategories()
 const { items, getItems } = useItems()
 
 const discountTargets = ref([]);
+
+const discountSchemeOption = [
+    {
+        id: "all-menu",
+        name: "All Menu"
+    },
+    {
+        id: "per-category",
+        name: "Per Category"
+    },
+    {
+        id: "per-item",
+        name: "Per Item"
+    }
+];
+
 const discount = reactive({
     name: '',
     scheme: '',
