@@ -18,6 +18,7 @@ class CreateDiscountsTable extends Migration
             $table->morphs('discountable');
             $table->string('discount_name');
             $table->string('percentage');
+            $table->string('scheme');
             $table->timestamps();
         });
     }

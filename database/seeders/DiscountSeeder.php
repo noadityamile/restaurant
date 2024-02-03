@@ -18,12 +18,14 @@ class DiscountSeeder extends Seeder
                 'discountable_type' => "App\Models\Category",
                 'discountable_id' => 3,
                 'discount_name' => "category discount",
+                'scheme' => "per-category",
                 'percentage' => 20
             ],
             [
                 'discountable_type' => "App\Models\Item",
                 'discountable_id' => 2,
                 'discount_name' => "potato discount",
+                'scheme' => "per-item",
                 'percentage' => 5
             ],
         ]);

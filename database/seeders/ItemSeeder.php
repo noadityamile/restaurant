@@ -16,14 +16,14 @@ class ItemSeeder extends Seeder
     {
         DB::table('items')->insert([
             [
-                'item_name' => "Asian Fried Rice",
+                'name' => "Asian Fried Rice",
                 'description' => "Fried Rice with seafood and beef.",
                 'category_id' => 1,
                 'price' => 2,
                 'created_at' => Carbon::now()
             ],
             [
-                'item_name' => "Potato Wedges",
+                'name' => "Potato Wedges",
                 'description' => "Belgium potato slice with tomato sauce.",
                 'category_id' => 2,
                 'price' => 1,

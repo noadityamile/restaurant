@@ -19,7 +19,7 @@ class CategoryFactory extends Factory
         $name = $this->faker->name();
 
         return [
-            'category_name' => $name
+            'name' => $name
         ];
     }
 }
