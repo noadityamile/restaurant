@@ -17,7 +17,9 @@ class DiscountResource extends JsonResource
         return [
             'id' => $this->id,
             'discount_name' => $this->discount_name,
-            'percentage' => $this->percentage . "%"
+            'scheme'        => $this->scheme,
+            'target'        => $this->discountable->name,
+            'percentage'    => $this->percentage . "%"
         ];
     }
 }

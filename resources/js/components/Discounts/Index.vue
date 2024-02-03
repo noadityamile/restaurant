@@ -11,6 +11,12 @@
                             Discount Name
                         </th>
                         <th>
+                            Scheme
+                        </th>
+                        <th>
+                            Applied Item/Category
+                        </th>
+                        <th>
                             Percentage
                         </th>
                     </tr>
@@ -22,6 +28,12 @@
                         </td>
                         <td>
                             {{ discount.discount_name }}
+                        </td>
+                        <td>
+                            {{ discount.scheme }}
+                        </td>
+                        <td>
+                            {{ discount.target }}
                         </td>
                         <td>
                             {{ discount.percentage }}

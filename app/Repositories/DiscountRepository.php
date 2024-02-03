@@ -9,7 +9,7 @@ use App\Models\Item;
 class DiscountRepository
 {
     public function getAll(){
-        return Discount::get();
+        return Discount::with('discountable')->get();
     }
 
     public function insert($request)
