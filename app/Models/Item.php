@@ -26,6 +26,12 @@ class Item extends Model
         return $this->morphOne(Discount::class, 'discountable');
     }
 
+    public function getDiscountedPriceAttribute(){
+        $discountPercentage = $this->discounts->percentage ?? 0;
+
+        return (1 - $discountPercentage/100) * $this->price;
+    }
+
     public function getEffectivePriceAttribute()
     {
         $discountPercentage = $this->category->discount->percentage ?? 0;
