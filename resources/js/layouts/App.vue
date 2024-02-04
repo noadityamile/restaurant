@@ -23,6 +23,9 @@
                         <li class="nav-item">
                             <router-link active-class="text-red" class="nav-link" to="/categories">Categories</router-link>
                         </li>
+                        <li class="nav-item">
+                            <router-link active-class="text-red" class="nav-link" to="/discounts">Discounts</router-link>
+                        </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
