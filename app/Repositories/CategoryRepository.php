@@ -17,7 +17,7 @@ class CategoryRepository
         return $item->update($request);
     }
 
-    public function delete($item){
-        return $item->delete();
+    public function delete($category){
+        return $category->delete();
      }
 }

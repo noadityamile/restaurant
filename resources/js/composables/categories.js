@@ -1,5 +1,6 @@
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
+import Swal from 'sweetalert2';
 
 export default function useCategories() {
     const categories = ref({})
@@ -49,5 +50,23 @@ export default function useCategories() {
         }
     };
 
-    return { categories,category, getCategory, getCategories, storeCategory, updateCategory, validationErrors }
+    const deleteCategory = async (id) => {
+        try {
+            await axios.delete(`/api/categories/${id}`);
+            await getCategories();
+            router.push({ name: 'categories.index' });
+            Swal.fire({
+                icon: 'success',
+                title: 'Category deleted successfully'
+            });
+        } catch (error) {
+            console.error('Error deleting category:', error);
+            Swal.fire({
+                icon: 'error',
+                title: 'Something went wrong'
+            });
+        }
+    };
+
+    return { categories,category, getCategory, getCategories, storeCategory, updateCategory, deleteCategory, validationErrors }
 }
