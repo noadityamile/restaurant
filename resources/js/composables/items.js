@@ -7,7 +7,6 @@ export default function useItems() {
     const item = ref({})
     const router = useRouter()
     const validationErrors = ref({})
-    const swal = inject('$swal')
 
     const getItems = (
         page = 1,
