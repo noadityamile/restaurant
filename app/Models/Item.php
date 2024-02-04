@@ -16,6 +16,8 @@ class Item extends Model
         'description'
     ];
 
+    protected $appends = ['discounted_price'];
+
     public function category()
     {
         return $this->belongsTo(Category::class, 'category_id');

@@ -25,7 +25,7 @@
                     <span v-if="category.item != null" class="bg-success">
                         <ul>
                             <li>
-                                <h4>{{ category.item.name }} <span class="px-4">${{ category.item.price }}</span></h4>
+                                <h4>{{ category.item.name }} <span class="px-4">${{ category.item.discounted_price }}</span></h4>
                             </li>
                         </ul>
                     </span>
