@@ -38,5 +38,16 @@ export default function useCategories() {
         }
     };
 
-    return { categories,category, getCategory, getCategories, storeCategory, validationErrors }
+    const updateCategory = async (category) => {
+        try {
+            const response = await axios.put(`/api/categories/${category.id}`, category);
+            router.push({ name: 'categories.index' });
+        } catch (error) {
+            if (error.response?.data) {
+                validationErrors.value = error.response.data.errors;
+            }
+        }
+    };
+
+    return { categories,category, getCategory, getCategories, storeCategory, updateCategory, validationErrors }
 }

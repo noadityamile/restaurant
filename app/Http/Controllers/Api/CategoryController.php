@@ -94,9 +94,11 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Category $category, StoreCategoryRequest $request)
     {
-        //
+        $this->categoryRepo->update($category, $request->validated());
+
+        return new CategoryResource($category);
     }
 
     /**

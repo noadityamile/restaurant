@@ -14,7 +14,7 @@ import useCategories from '../../composables/categories';
 import BaseInput from '../templates/BaseInput.vue';
 import SelectOption from '../templates/SelectOption.vue';
 
-const { category, getCategory, categories, getCategories, storeCategory, validationErrors } = useCategories()
+const { category, getCategory, categories, getCategories, storeCategory, updateCategory, validationErrors } = useCategories()
 const route = useRoute()
 
 const categoryOption = ref([]);
