@@ -26,22 +26,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::with(['children','discounts', 'item', 'parent'])
-            ->root()
-            ->get();
-
-            // $children = $this->getChildren($categories[0]);
-            // dd(json_encode($children, true));
-        return CategoryResource::collection($categories);
-    }
-
-    public function getChildren($category){
-
-        if(! isset($category->children)){
-            return $category;
-        }
-
-        return $this->getChildren($category->children);
+        return CategoryResource::collection($this->categoryRepo->getAll());
     }
 
     /**
