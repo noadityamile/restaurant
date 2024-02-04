@@ -16,4 +16,8 @@ class ItemRepository
     {
         return $item->update($request);
     }
+
+    public function delete($item){
+        return $item->delete();
+     }
 }

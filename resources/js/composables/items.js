@@ -1,5 +1,6 @@
 import { ref, inject } from 'vue'
 import { useRouter } from 'vue-router'
+import Swal from 'sweetalert2';
 
 export default function useItems() {
     const items = ref({})
@@ -58,5 +59,23 @@ export default function useItems() {
         }
     };
 
-    return { items, item, getItems, getItem, storeItem, updateItem, validationErrors }
+    const deleteItem = async (id) => {
+        try {
+            await axios.delete(`/api/items/${id}`);
+            await getItems();
+            router.push({ name: 'items.index' });
+            Swal.fire({
+                icon: 'success',
+                title: 'Item deleted successfully'
+            });
+        } catch (error) {
+            console.error('Error deleting item:', error);
+            Swal.fire({
+                icon: 'error',
+                title: 'Something went wrong'
+            });
+        }
+    };
+
+    return { items, item, getItems, getItem, storeItem, updateItem, deleteItem, validationErrors }
 }
