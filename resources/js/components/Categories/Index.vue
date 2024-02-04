@@ -13,12 +13,8 @@
                         <router-link :to="{ name: 'categories.edit', params: { id: category.id } }" >
                         {{ category.name }}
                         </router-link>
-                        <!-- <ul v-if="category.children">
-                            <li v-for="subcategory in category.children" :key="subcategory.id">
-                                {{ subcategory.name }}
-                            </li>
-                        </ul> -->
-                        <sub-category v-if="category.children" :category="category.children"/>
+
+                        <sub-category v-if="category.children" :category="category.children" :useLink="true"/>
                     </td>
                 </tr>
             </tbody>

@@ -1,8 +1,9 @@
 <template>
     <div>
-        <ul>
+        <!-- <ul>
             <li v-for="category in categories.data" :key="category.id">
-                {{ category.category_name }}
+                {{ category.name }} <span v-if="category.discounts != null">{{ category.discounts.percentage }}
+                </span>
                 <span v-if="category.item != null" class="bg-success">
                     <ul>
                         <li>
@@ -10,34 +11,34 @@
                         </li>
                     </ul>
                 </span>
-                <Tree :children="category.children" :indent="newIndent" />
             </li>
-        </ul>
+        </ul> -->
 
-        <!-- <table class="table table-hover">
-                <tr v-for="category in categories.data" :key="category.id">
-                    <div v-if="category.parent_id == 0">
-                        <div>
-                            {{ category.name }}
-                            <span v-if="category.item != null" class="bg-success">
-                                <br />
-                                {{ category.item.name }}
-                                <span>${{
-                                    category.item.price }}</span>
 
-                            </span>
-                        </div>
-                        <Tree :subcategories="subcategory.children"></Tree>
-                    </div>
-                </tr>
-            </table> -->
+        <table>
+            <tr v-for="category in categories.data" :key="category.id">
+                <td>
+
+                    {{ category.name }}
+
+                    <sub-category v-if="category.children" :category="category.children" :useLink="false" />
+                    <span v-if="category.item != null" class="bg-success">
+                        <ul>
+                            <li>
+                                <h4>{{ category.item.name }} <span class="px-4">${{ category.item.price }}</span></h4>
+                            </li>
+                        </ul>
+                    </span>
+                </td>
+            </tr>
+        </table>
     </div>
 </template>
 
 <script setup>
 import { onMounted, ref, computed } from "vue";
 import useCategories from "../../composables/categories";
-import Tree from "../Categories/Tree.vue";
+import SubCategory from "../Categories/SubCategory.vue";
 
 const { categories, getCategories } = useCategories()
 onMounted(() => {
