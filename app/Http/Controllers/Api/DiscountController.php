@@ -91,6 +91,8 @@ class DiscountController extends Controller
      */
     public function destroy(Discount $discount)
     {
-        return $this->discountRepo->delete($discount);
+        $this->discountRepo->delete($discount);
+
+        return response()->noContent();
     }
 }
