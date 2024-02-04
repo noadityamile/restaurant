@@ -8,7 +8,7 @@ export default function useCategories() {
             const response = await axios.get('/api/categories');
             categories.value = response.data;
         } catch (error) {
-            console.error('Error fetching discounts:', error);
+            console.error('Error fetching categories:', error);
             throw error;
         }
     };
