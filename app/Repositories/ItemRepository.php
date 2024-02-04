@@ -9,7 +9,11 @@ class ItemRepository
 
     public function insert($request)
     {
-        return Item::Create($request);
+        return Item::create($request);
     }
 
+    public function update($item, $request)
+    {
+        return $item->update($request);
+    }
 }

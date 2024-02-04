@@ -1,13 +1,15 @@
 import { createRouter, createWebHistory } from 'vue-router';
 
 import ItemsIndex from '../components/Items/Index.vue'
+import ItemsCreate from '../components/Items/Create.vue'
+import ItemsEdit from '../components/Items/Edit.vue'
+
 import CategoriesIndex from '../components/Categories/Index.vue'
 import MenusIndex from '../components/Menus/MenuIndex.vue'
 
 import DiscountsIndex from '../components/Discounts/Index.vue'
 import DiscountsCreate from '../components/Discounts/Create.vue'
 
-import ItemsCreate from '../components/Items/Create.vue'
 
 const routes = [
     {
@@ -22,6 +24,13 @@ const routes = [
         component: ItemsCreate,
         meta: { title: 'Add Item' }
     },
+    {
+        path: '/items/edit/:id',
+        name: 'items.edit',
+        component: ItemsEdit,
+        meta: { title: 'Edit Item' }
+    },
+
     {
         path: '/categories',
         name: 'categories.index',

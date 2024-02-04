@@ -27,7 +27,7 @@ class ItemController extends Controller
     {
         $items = Item::with('category', 'discounts')->get();
 
-    return ItemResource::collection($items);
+        return ItemResource::collection($items);
     }
 
     /**
@@ -57,9 +57,9 @@ class ItemController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Item $item)
     {
-        //
+        return new ItemResource($item);
     }
 
     /**
@@ -80,9 +80,11 @@ class ItemController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Item $item, StoreItemRequest $request)
     {
-        //
+        $this->itemRepo->update($item, $request->validated());
+
+        return new ItemResource($item);
     }
 
     /**
