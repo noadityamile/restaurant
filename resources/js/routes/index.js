@@ -5,6 +5,7 @@ import ItemsCreate from '../components/Items/Create.vue'
 import ItemsEdit from '../components/Items/Edit.vue'
 
 import CategoriesIndex from '../components/Categories/Index.vue'
+import CategoriesCreate from '../components/Categories/Create.vue'
 import MenusIndex from '../components/Menus/MenuIndex.vue'
 
 import DiscountsIndex from '../components/Discounts/Index.vue'
@@ -37,6 +38,13 @@ const routes = [
         component: CategoriesIndex,
         meta: { title: 'Categories Menu' }
     },
+    {
+        path: '/categories/create',
+        name: 'categories.create',
+        component: CategoriesCreate,
+        meta: { title: 'Add Category/SubCategory' }
+    },
+
     {
         path: '/menu',
         name: 'menu.index',

@@ -1,5 +1,6 @@
 <template>
     <div class="container">
+        <router-link to="/categories/create" class="mb-2 btn btn-primary">+ Add Category</router-link>
         <table class="table table-striped table-hover table-bordered">
             <thead>
                 <tr>
