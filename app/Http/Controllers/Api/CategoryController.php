@@ -3,12 +3,22 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Resources\CategoryResource;
 use App\Models\Category;
+use App\Repositories\CategoryRepository;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
+    private $categoryRepo;
+
+    public function __construct()
+    {
+        $this->categoryRepo = new CategoryRepository();
+    }
+
+
     /**
      * Display a listing of the resource.
      *
@@ -50,9 +60,9 @@ class CategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreCategoryRequest $request)
     {
-        //
+        return $this->categoryRepo->insert($request->validated());
     }
 
     /**

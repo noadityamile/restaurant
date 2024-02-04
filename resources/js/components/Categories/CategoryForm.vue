@@ -14,7 +14,7 @@ import useCategories from '../../composables/categories';
 import BaseInput from '../templates/BaseInput.vue';
 import SelectOption from '../templates/SelectOption.vue';
 
-const { category, getCategory, categories, getCategories } = useCategories()
+const { category, getCategory, categories, getCategories, storeCategory, validationErrors } = useCategories()
 const route = useRoute()
 
 const categoryOption = ref([]);
@@ -22,18 +22,19 @@ const categoryOption = ref([]);
 const { action } = defineProps(['action']);
 
 onMounted(async () => {
-    if(action == "edit"){
+    if (action == "edit") {
         await getItem(route.params.id)
     }
     await getCategories()
     categoryOption.value = categories.value.data
 })
 
-const handleSubmit = (item) => {
-    if(action == "edit"){
-        updateCategory(item)
-    }else {
-        storeCategory(item)
+const handleSubmit = (category) => {
+    category.parent_id = category.category_id
+    if (action == "edit") {
+        updateCategory(category)
+    } else {
+        storeCategory(category)
     }
 }
 

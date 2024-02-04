@@ -9,7 +9,7 @@ class Category extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['category_name', 'parent_id'];
+    protected $fillable = ['name', 'parent_id'];
 
     public function scopeRoot($query){
         $query->where('parent_id', 0)->orWhere('parent_id', null);
