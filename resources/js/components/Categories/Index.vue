@@ -11,11 +11,12 @@
                 <tr v-for="category in categories.data" :key="category.id">
                     <td>
                         {{ category.name }}
-                        <ul v-if="category.children">
+                        <!-- <ul v-if="category.children">
                             <li v-for="subcategory in category.children" :key="subcategory.id">
                                 {{ subcategory.name }}
                             </li>
-                        </ul>
+                        </ul> -->
+                        <sub-category v-if="category.children" :category="category.children"/>
                     </td>
                 </tr>
             </tbody>
@@ -27,6 +28,8 @@
 <script setup>
 import { onMounted } from "vue";
 import useCategories from "../../composables/categories";
+import SubCategory from "./SubCategory.vue";
+
 
 const { categories, getCategories } = useCategories()
 onMounted(() => {
