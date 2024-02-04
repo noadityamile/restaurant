@@ -10,7 +10,9 @@
             <tbody>
                 <tr v-for="category in categories.data" :key="category.id">
                     <td>
+                        <router-link :to="{ name: 'categories.edit', params: { id: category.id } }" >
                         {{ category.name }}
+                        </router-link>
                         <!-- <ul v-if="category.children">
                             <li v-for="subcategory in category.children" :key="subcategory.id">
                                 {{ subcategory.name }}

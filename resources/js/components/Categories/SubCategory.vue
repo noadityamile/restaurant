@@ -1,7 +1,9 @@
 <template>
     <ul>
         <li v-for="subcategory in category" :key="subcategory.id">
-            {{ subcategory.name }}
+            <router-link :to="{ name: 'categories.edit', params: { id: subcategory.id } }" >
+                {{ subcategory.name }}
+            </router-link>
             <sub-category v-if="subcategory.children" :category="subcategory.children"/>
         </li>
     </ul>

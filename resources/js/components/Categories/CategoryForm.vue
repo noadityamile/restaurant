@@ -23,7 +23,7 @@ const { action } = defineProps(['action']);
 
 onMounted(async () => {
     if (action == "edit") {
-        await getItem(route.params.id)
+        await getCategory(route.params.id)
     }
     await getCategories()
     categoryOption.value = categories.value.data
