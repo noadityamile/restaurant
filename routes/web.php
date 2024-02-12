@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\LogoutController;
+use App\Http\Controllers\Auth\RegisterController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,6 +23,10 @@ use Illuminate\Support\Facades\Route;
 Route::view('/{any?}', 'dashboard')
     ->where('any', '.*');
 
-Auth::routes();
+Route::post('/login', LoginController::class)->middleware('guest');
+Route::post('/logout', LogoutController::class);
+Route::post('/register', RegisterController::class);
+
+
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

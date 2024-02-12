@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\Api\Auth\LoginController;
+use App\Http\Controllers\Api\Auth\LogoutController;
+use App\Http\Controllers\Api\Auth\RegisterController;
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\DiscountController;
 use App\Http\Controllers\Api\ItemController;
@@ -23,4 +26,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::resource('categories', CategoryController::class);
 Route::resource('items', ItemController::class);
 Route::resource('discounts', DiscountController::class);
+
+Route::post('/login', LoginController::class);
+Route::post('/logout', LogoutController::class)->middleware('auth:sanctum');
+Route::post('/register', RegisterController::class);
 
