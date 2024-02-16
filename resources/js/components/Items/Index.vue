@@ -1,10 +1,4 @@
 <template>
-    <div id="createItem" v-if="formMode == 'create'">
-        <ItemCreate></ItemCreate>
-    </div>
-    <div id="updateItem" v-if="formMode == 'edit'">
-        <ItemUpdate :editItem="editItem"></ItemUpdate>
-    </div>
     <div id="listItem">
         <div class="container">
             <router-link to="/items/create" class="mb-2 btn btn-primary">+ Add Item</router-link>

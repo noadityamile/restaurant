@@ -13,66 +13,83 @@ import MenusIndex from '../components/Menus/MenuIndex.vue'
 import DiscountsIndex from '../components/Discounts/Index.vue'
 import DiscountsCreate from '../components/Discounts/Create.vue'
 
+import AuthenticatedLayout from '../layouts/Authenticated.vue';
+import GuestLayout from '../layouts/Guest.vue';
+import Login from '../components/Auth/Login.vue';
 
 const routes = [
     {
-        path: '/items',
-        name: 'items.index',
-        component: ItemsIndex,
-        meta: { title: 'Build Your Own Menu' }
+        component: GuestLayout,
+        children: [
+            {
+                path: '/login',
+                name: 'login',
+                component: Login
+            },
+        ]
     },
     {
-        path: '/items/create',
-        name: 'items.create',
-        component: ItemsCreate,
-        meta: { title: 'Add Item' }
-    },
-    {
-        path: '/items/edit/:id',
-        name: 'items.edit',
-        component: ItemsEdit,
-        meta: { title: 'Edit Item' }
-    },
+        component: AuthenticatedLayout,
+        children: [
+            {
+                path: '/items',
+                name: 'items.index',
+                component: ItemsIndex,
+                meta: { title: 'Build Your Own Menu' }
+            },
+            {
+                path: '/items/create',
+                name: 'items.create',
+                component: ItemsCreate,
+                meta: { title: 'Add Item' }
+            },
+            {
+                path: '/items/edit/:id',
+                name: 'items.edit',
+                component: ItemsEdit,
+                meta: { title: 'Edit Item' }
+            },
 
-    {
-        path: '/categories',
-        name: 'categories.index',
-        component: CategoriesIndex,
-        meta: { title: 'Categories Menu' }
-    },
-    {
-        path: '/categories/create',
-        name: 'categories.create',
-        component: CategoriesCreate,
-        meta: { title: 'Add Category/SubCategory' }
-    },
-    {
-        path: '/categories/edit/:id',
-        name: 'categories.edit',
-        component: CategoriesEdit,
-        meta: { title: 'Edit Category/SubCategory' }
-    },
+            {
+                path: '/categories',
+                name: 'categories.index',
+                component: CategoriesIndex,
+                meta: { title: 'Categories Menu' }
+            },
+            {
+                path: '/categories/create',
+                name: 'categories.create',
+                component: CategoriesCreate,
+                meta: { title: 'Add Category/SubCategory' }
+            },
+            {
+                path: '/categories/edit/:id',
+                name: 'categories.edit',
+                component: CategoriesEdit,
+                meta: { title: 'Edit Category/SubCategory' }
+            },
 
-    {
-        path: '/menu',
-        name: 'menu.index',
-        component: MenusIndex,
-        meta: { title: 'Main Menu' }
-    },
-    //discounts
-    {
-        path: '/discounts',
-        component: DiscountsIndex,
-        name: 'discounts.index',
-        meta: { title: 'Discount List' }
-    },
-    {
-        path: '/discounts/create',
-        component: DiscountsCreate,
-        name: 'discounts.create',
-        meta: { title: 'Create Discount' }
-    },
-
+            {
+                path: '/menu',
+                name: 'menu.index',
+                component: MenusIndex,
+                meta: { title: 'Main Menu' }
+            },
+            //discounts
+            {
+                path: '/discounts',
+                component: DiscountsIndex,
+                name: 'discounts.index',
+                meta: { title: 'Discount List' }
+            },
+            {
+                path: '/discounts/create',
+                component: DiscountsCreate,
+                name: 'discounts.create',
+                meta: { title: 'Create Discount' }
+            }
+        ]
+    }
 ]
 
 export default createRouter({
